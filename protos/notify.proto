@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+service  Notify {
+  rpc Subscribe (SubscribeRequest) returns (stream SubscribeResponse) {}
+}
+
+message SubscribeRequest {
+}
+
+message SubscribeResponse {
+  oneof notification {
+    PushMessage message = 1;
+    PushAlert alert = 2;
+    PushWarning warning = 3;
+    PushError error = 4;
+  }
+}
+
+message PushMessage {
+  string message = 1;
+}
+
+message PushAlert {
+  string message = 1;
+}
+
+message PushWarning {
+  string message = 1;
+}
+
+message PushError {
+  string message = 1;
+  int64 returnCode = 2;
+}
